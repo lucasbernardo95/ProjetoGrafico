@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Trabalho de estatística</title>
+        <style rel="stylesheet" type="text/css">
+            .esquerda { float: left; width: 50%; }
+            .cdireita { margin-left: 50%; }
+            body {background-color: blue;}
+            .descricao{
+                color: blue;
+                background: #fff;
+                width: 500px;
+                padding: 20px;
+                border-radius: 10px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>           
+            <p:menubar>
+                <p:menuitem value="Histograma" url="histograma.xhtml"></p:menuitem>
+                <p:menuitem value="Descrição" url="detalhes.xhtml"></p:menuitem>
+            </p:menubar>
+        </h:form>
+        <hr/>
+        <ui:insert></ui:insert>
+    </h:body>
+</html>
+

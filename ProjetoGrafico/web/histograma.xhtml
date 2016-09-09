@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="template.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body onload="#{bar.criarBarra()}">
+        <p:panelGrid columns="2">
+            <p:commandButton value="Exibir histograma" type="button" onclick="PF('histograma').show();" 
+                             update="@form" />
+            <p:commandButton value="Exibir gráfico da frequência acumulada" type="button" onclick="PF('frequencia').show();" 
+                             update="@form" />
+        </p:panelGrid>
+
+        <p:panelGrid columns="8" >
+
+            <h:outputLabel value="Média"></h:outputLabel>
+            <p:outputLabel value="#{bar.media}">
+                <f:convertNumber pattern="#,##0.00"/>
+            </p:outputLabel>
+
+            <h:outputLabel value="Amplitude"></h:outputLabel>
+            <p:outputLabel value="#{bar.amplitude}">
+                <f:convertNumber pattern="#,##0.00"/>
+            </p:outputLabel>
+
+            <h:outputLabel value="Variância amostral"></h:outputLabel>
+            <p:outputLabel value="#{bar.variancia}">
+                <f:convertNumber pattern="#,##0.00"/>
+            </p:outputLabel>
+
+            <h:outputLabel value="Desvio padrão amostral"></h:outputLabel>
+            <p:outputLabel value="#{bar.desvioPadrao}">
+                <f:convertNumber pattern="#,##0.00"/>
+            </p:outputLabel>
+
+        </p:panelGrid>
+
+        <p:dialog header="Histograma" widgetVar="histograma" showEffect="explode" hideEffect="bounce" height="70%" width="70%" resizable="false">
+            <p:chart type="bar" model="#{bar.barraGrafico}" />
+        </p:dialog>
+        <p:dialog header="Frequência acumulada" widgetVar="frequencia" showEffect="explode" hideEffect="bounce" height="70%" width="70%" resizable="false">
+            <p:chart type="line" model="#{bar.linhaGrafico}" style="height:300px;"/>
+        </p:dialog>
+
+        <p:dataTable var="valor" value="#{bar.listTable}" scrollable="true" 
+                     class="esquerda" scrollHeight="200">
+            <p:column headerText="Valores" footerText="Valores">
+                <h:outputText value="#{valor.dado}" />
+            </p:column>
+            <p:column headerText="Desvio padrão" footerText="Desvio">
+                <h:outputText value="#{valor.desvio}">
+                    <f:convertNumber pattern="#,##0.00"/>
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
+
+        <p:dataTable var="valor" value="#{bar.frequencia}" scrollable="true" 
+                     scrollHeight="200" class="direita">
+            <p:column headerText="Valores" footerText="Valores">
+                <h:outputText value="#{valor.dado}"/>
+            </p:column>
+            <p:column headerText="Frequência acumulada" footerText="Total frequências #{bar.somaFrequencias}">
+                <h:outputText value="#{valor.frequencia}" />
+            </p:column>
+        </p:dataTable>
+
+    </h:body>
+</ui:decorate>
+
